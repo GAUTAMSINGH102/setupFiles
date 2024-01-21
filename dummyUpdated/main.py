@@ -1,3 +1,5 @@
+import numpy as np
+
 all = """
 "**BEGIN,2022:P:USDECORW:1,85-3349177,Default,Default,Main Office/Main"
 \@101 \ 1
@@ -515,3 +517,25 @@ df = pd.DataFrame.from_dict(flattened_data, orient='index')
 # Save the dataframe to an Excel file
 df.to_excel('third.xlsx', index=False)
 
+# Extract column names as a NumPy array
+coli_array = df.columns.to_numpy()
+coli = np.sort(coli_array)
+
+# Sort the DataFrame based on the sorted column names
+df_sorted = df[coli]
+
+# Save the sorted DataFrame to an Excel file
+df_sorted.to_excel('sort.xlsx', index=False)
+
+# Define a function to remove periods and double quotes from a single element
+def remove_special_characters(value):
+    if pd.notna(value):  # Check if the value is not NaN
+        value = str(value)
+        value = value.replace('.', '').replace('"', '')
+    return value
+
+# Apply the function to each element in the DataFrame
+df_cleaned = df.applymap(remove_special_characters)
+
+# Save the sorted DataFrame to an Excel file
+df_cleaned.to_excel('clean.xlsx', index=False)

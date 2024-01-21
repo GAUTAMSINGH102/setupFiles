@@ -83,7 +83,7 @@ if os.path.exists(file_path):
     # If the file exists, read its content using Pandas
     second = pd.read_csv(file_path)
 else:
-    second = pd.DataFrame()
+    second = pd.DataFrame(columns=['1', '2'])
 
 coli = second.columns
 
@@ -161,7 +161,7 @@ while(startingIndex <= allLength):
             # If the file exists, read its content using Pandas
             second = pd.read_csv(file_path)
         else:
-            second = pd.DataFrame()
+            second = pd.DataFrame(columns=['1', '2'])
 
         finalData_df = pd.DataFrame(finalData, columns=coli)
 
